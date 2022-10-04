@@ -1,4 +1,3 @@
-//import java.net.*;
 import java.time.*;
 import java.util.*;
 
@@ -6,6 +5,7 @@ public class p2pServerTimer extends Thread
 {
     private HashMap<Peer, LocalDateTime> timers;
     private ArrayList<Peer> peers;
+    
     public p2pServerTimer(HashMap<Peer, LocalDateTime> timers, ArrayList<Peer> peers)
     {
         this.timers = timers;
@@ -32,7 +32,7 @@ public class p2pServerTimer extends Thread
             }
             catch (InterruptedException e)
             {
-                //do nothing
+                
             }
         }
     }

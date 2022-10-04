@@ -15,11 +15,11 @@ public class p2pPeerClient extends Thread
 	protected String resourceDirectory;
 
 	public p2pPeerClient(InetAddress localAddress, int port, p2pServerInterface serverIf, String resourceDirectory) throws IOException {
-		this.port = port + 101;
 		this.addr = localAddress;
-		socket = new DatagramSocket(this.port);
-		this.resourceDirectory = "arquivos_receive";
+		this.port = port + 101;
 		serverInterface = serverIf;
+		this.resourceDirectory = "arquivos_receive";
+		socket = new DatagramSocket(this.port);
 	}
 
 	private enum inputType {
@@ -38,7 +38,7 @@ public class p2pPeerClient extends Thread
 			System.out.println("\n<list> <search_term>(optional)");
 			System.out.println("\n<peer> <file_name> <peer_ip> <peer_port>");
 			System.out.println("Example: list");
-			System.out.println("Example: list HD");
+			System.out.println("Example: list <search_string>");
 			System.out.println("Example: peer file.txt <peer_ip> <port>");
 			try 
 			{
@@ -67,17 +67,11 @@ public class p2pPeerClient extends Thread
 						ArrayList<String> recursos = serverInterface.listResources(null);
 						System.out.println("-=-=-=-\nResources: \n");
 						System.out.println(recursos);
-						/*for(Peer p : recursos) {
-							System.out.println(p.toString());
-						}*/
 						break;
 					case LIST_SEARCH:
 						ArrayList<String> recursosSearch = serverInterface.listResources(vars[1]);
 						System.out.println("-=-=-=-\nResources with term \"" + vars[1] + "\": \n");
 						System.out.println(recursosSearch);
-						/*for(Peer p : recursosSearch) {
-							System.out.println(p.toString());
-						}*/
 						break;
 					case FILE:
 						DatagramPacket fileRequest = new DatagramPacket(vars[1].getBytes(), vars[1].getBytes().length, InetAddress.getByName(vars[2]), Integer.parseInt(vars[3]));
@@ -113,7 +107,6 @@ public class p2pPeerClient extends Thread
 						int posicInicialData = fileBuffer.position();
 						//get file data
 						for(i = posicInicialData; i<posicInicialData+fileSize; i++) {
-							//System.out.println(fileBuffer.position());
 							fileData[aux] = fileBuffer.get();
 							aux++;
 						}
@@ -127,7 +120,6 @@ public class p2pPeerClient extends Thread
 							result.append(String.format("%02X", aByte));
 						}
 
-						//System.out.println(result.toString());
 
 						if(result.toString().equals(fileHash)) {
 							System.out.println("File " + vars[1] + " written successfully");
@@ -144,19 +136,6 @@ public class p2pPeerClient extends Thread
 						break;
 					default:
 				}
-
-				/*addr = InetAddress.getByName(vars[2]);
-				String str2 = vars[0] + " " + vars[1];
-				resource = str2.getBytes();
-				if (vars.length == 4) 
-				{
-					System.out.println("Sending message to peer on port " + vars[3]);
-					peer_port = Integer.parseInt(vars[3]);
-				} 
-				else 
-				{
-					peer_port = 9000;
-				}*/
 			} 
 			catch (IOException e) 
 			{
@@ -167,7 +146,7 @@ public class p2pPeerClient extends Thread
 				e.printStackTrace();
 			}
 			
-			//comentar? colocar if?
+			
 			/*try 
 			{
 				//packet = new DatagramPacket(resource, resource.length, addr, peer_port);

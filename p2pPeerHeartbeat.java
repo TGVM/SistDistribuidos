@@ -1,7 +1,6 @@
 import java.io.*;
 import java.net.*;
 import java.rmi.RemoteException;
-//import java.util.*;
 
 public class p2pPeerHeartbeat extends Thread {
 	protected InetAddress localAddress = null;
@@ -10,9 +9,9 @@ public class p2pPeerHeartbeat extends Thread {
 
 	public p2pPeerHeartbeat(InetAddress localAddress, int port, p2pServerInterface serverIf) throws IOException 
 	{
-		this.serverIf = serverIf;
 		this.localAddress = localAddress;
 		this.port = port;
+		this.serverIf = serverIf;
 	}
 
 	public void run() 
@@ -26,7 +25,7 @@ public class p2pPeerHeartbeat extends Thread {
 			} 
 			catch(InterruptedException e) 
 			{
-				//do nothing
+				
 			}
 			catch (RemoteException e)
 			{

@@ -17,7 +17,6 @@ public class p2pPeerThread extends Thread {
 
 	public p2pPeerThread(InetAddress localAddress, int port, p2pServerInterface serverInterface) throws IOException 
 	{
-		//create <nome_do_recurso> <hash>
 		addr = localAddress;
 		this.port = port;
 		socket = new DatagramSocket(port);
@@ -40,10 +39,9 @@ public class p2pPeerThread extends Thread {
 			for(String str : fileList) 
 			{
 				hashTable.put(str, generateFileHash(fileDirectory + "\\" + str));
-				// System.out.println("arq: " + str + " Hash: " + generateFileHash("arquivos\\" + str));
 			}
 			
-			//Cria uma datagrama para cada arquivo
+			//Cria datagrama para cada arquivo
 			for(String key : hashTable.keySet()) 
 			{
 				serverInterface.registerResource(addr, port, key, hashTable.get(key));

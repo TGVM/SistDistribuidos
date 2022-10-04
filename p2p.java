@@ -12,8 +12,6 @@ public class p2p extends UnicastRemoteObject implements p2pServerInterface
 	private volatile ArrayList<Peer> peers;
 	private volatile HashMap<Peer, LocalDateTime> timers;
 
-
-    //arrumar
 	public p2p() throws RemoteException   
 	{
 		peers = new ArrayList<>();
@@ -21,26 +19,20 @@ public class p2p extends UnicastRemoteObject implements p2pServerInterface
 		new p2pServerTimer(timers, peers).start();
 	}
 
-   
-
 	public static void main(String[] args) throws IOException 
 	{
-		
-        if (args.length != 1 || args.length != 3) 
+		System.out.println(args[0]);
+        if (args.length != 2 && args.length != 4) 
 		{
-            System.out.println(args[0]);
 			System.out.println("Usage: java p2p Server <server_ip> || java p2p Peer <server_address> <local_address> <localport>");     
 			System.exit(1);
 		}
 
-
-        //fazer condicionais pra modo server e pra modo peer
         if(args[0].equals("Server")){
             server(args[1]);
         }else if(args[0].equals("Peer")){
             peer(args[1], args[2], args[3]);
         }
-		
 	}
 
     public static synchronized void server(String server_ip){
@@ -128,7 +120,6 @@ public class p2p extends UnicastRemoteObject implements p2pServerInterface
 		ArrayList<String> result = new ArrayList<String>();
 
 		for(Peer p : peers) 
-
 		{
 			for(String recurso : p.resources.keySet()) 
 			{
