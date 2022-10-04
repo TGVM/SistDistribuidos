@@ -38,7 +38,7 @@ public class p2pPeerThread extends Thread {
 			//Cria hash para cada arquivo
 			for(String str : fileList) 
 			{
-				hashTable.put(str, generateFileHash(fileDirectory + "\\" + str));
+				hashTable.put(str, generateFileHash(fileDirectory + "/" + str)); //if windows use "\\"
 			}
 			
 			//Cria datagrama para cada arquivo
