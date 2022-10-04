@@ -146,35 +146,6 @@ public class p2pPeerClient extends Thread
 				e.printStackTrace();
 			}
 			
-			
-			/*try 
-			{
-				//packet = new DatagramPacket(resource, resource.length, addr, peer_port);
-				socket.send(packet);
-				
-				while (true) 
-				{
-					try 
-					{
-						// obtem a resposta
-						packet = new DatagramPacket(response, response.length);
-						socket.setSoTimeout(500);
-						socket.receive(packet);
-						
-						// mostra a resposta
-						String resposta = new String(packet.getData(), 0, packet.getLength());
-						System.out.println("recebido: " + resposta);
-						//Salva o download
-					} 
-					catch (IOException e) 
-					{
-						break;
-					}
-				}
-			} 
-			catch (IOException e) 
-			{
-			}*/
 		}
 	}
 }
